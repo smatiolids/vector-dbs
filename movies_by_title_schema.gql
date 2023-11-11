@@ -1,0 +1,19 @@
+mutation createMoviesTable {
+  movies_by_title: createTable(
+    keyspaceName:"netflix1",
+    tableName:"movies_by_title",
+    ifNotExists: true,
+    partitionKeys: [
+      { name: "title", type: {basic: TEXT} }
+    ]
+    clusteringKeys: [ 
+      { name: "year", type: {basic: INT}, order: "DESC" },
+      { name: "genre", type: {basic: TEXT}, order: "ASC" }
+    ]
+    values: [
+      { name: "synopsis", type: {basic: TEXT} },
+      { name: "duration", type: {basic: INT} },
+      { name: "thumbnail", type: {basic: TEXT} }
+    ]
+  )
+}
